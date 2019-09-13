@@ -1,12 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no, maximum-scale=1">
+        <meta name="yandex-verification" content="c64747aabd295094"/>
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="keywords" content="Жилье в Терсколе недорого: апартаменты, хостел, коттедж эконом класса.
+        Жилье эконом класса в Приэльбрусье"/>
+        <meta name="description" content="Terskol Home - недорогое уютное жилье в Терсколе: апартаменты, хостел, коттедж.
+        Жилье эконом класса в Приэльбрусье"/>
+        {% block stylesheets %}
+            <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+            <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/slick-theme.css') }}">
+            {#<link rel="stylesheet" href="{{ asset('css/normalize.min.css')}}">#}
+            <link rel="stylesheet" href="{{ asset('css/ion.calendar.css')}}">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+            <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('apple-touch-icon.png') }}">
+            <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+            <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}/">
+            <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+            <link rel="mask-icon" href="{{ asset('safari-pinned-tab.svg') }}" color="#1f1f1f">
+        {% endblock %}
+        <meta name="msapplication-TileColor" content="#ffc40d">
+        <meta name="theme-color" content="#ffffff">
+        <script src="https://api-maps.yandex.ru/2.1/?apikey=1b4c293c-6ae0-45ed-bd17-3a90ce8109dc&lang=ru_RU"
+                type="text/javascript">
+        </script>
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block body %}
+
+        {% endblock %}
+
+        {% block javascripts %}
+            <script src="{{ asset('js/jquery-3.3.1.slim.min.js') }}"></script>
+            <script src="{{ asset('js/vendor.min.js')}}"></script>
+            <script src="{{ asset('js/slick.min.js')}}"></script>
+            <script src="{{ asset('js/moment-with-locales.min.js')}}"></script>
+            <script src="{{ asset('js/ion.calendar.min.js')}}"></script>
+            <script src="{{ asset('js/index.js')}}"></script>
+        {% endblock %}
     </body>
 </html>

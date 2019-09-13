@@ -1,0 +1,644 @@
+{% extends 'base.html.twig' %}
+{% block title %}Гостиница в Терсколе, аренда жилья недорого, снять хостел по низкой цене!{% endblock %}
+{% block stylesheets %}
+        {{ parent() }}
+{% endblock %}
+{% block body %}
+    <div class="header">
+        <div class="room-status yes">Есть места!</div>
+        <h1><a href="/">Terskol Home</a></h1>
+        <div class="call-us">
+            <a href="tel:+79287075517">
+                + 7 928 707 55 17
+            </a>
+        </div>
+    </div>
+    <div class="cont s--inactive">
+        <!-- cont inner start -->
+        <div class="cont__inner">
+            <!-- el start -->
+            <div class="el has-map">
+                <div class="el__overflow">
+                    <div class="el__inner">
+                        <div class="el__bg"></div>
+                        <div class="el__preview-cont">
+                            <h2 class="el__heading">О нас</h2>
+                        </div>
+                        <div class="el__content">
+                            <div class="el__text">О нас</div>
+                            <div class="el__content-left">
+                                <div class="el__description">
+                                    <b>Адреса объектов Terskol Home</b><br/>
+                                    Россия, КБР, с Терксол
+                                    <ul class="el__adress">
+                                        <li> - Апартаменты: ул. Эльбрусская дом 5</li>
+                                        <li> - Хостел: ул. Эльбрусская дом 8</li>
+                                        <li> - Коттедж "Сапира": ул Эльбрусская дом 8а</li>
+                                    </ul>
+                                </div>
+                                <div class="el__description">
+                                    <p><b>Сведения об организации:</b> ИП Тилов Ибрагим Даулетович</p>
+                                    <p><b>ИНН:</b> 071002805487</p>
+                                    <p><b>ОГРНИП:</b> 314072010500032</p>
+                                </div>
+                                <div class="el__description">
+                                    Адрес электронной почты:
+                                    <a href="mailto:sapira-terskol@mail.ru">
+                                        <b> sapira-terskol@mail.ru</b>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="el__content-right">
+                                <div class="el__map" id="yandexMap"></div>
+                            </div>
+                            <div class="el__close-btn"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="el__index">
+                    <div class="el__index-back">Контакты и данные предприятия</div>
+                    <div class="el__index-front">
+                        <div class="el__index-overlay" data-index="Контакты и данные предприятия">
+                            ККонтакты и данные предприятия
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- el end -->
+            <!-- el start -->
+            <div class="el">
+                <div class="el__overflow">
+                    <div class="el__inner">
+                        <div class="el__bg"></div>
+                        <div class="el__preview-cont">
+                            <h2 class="el__heading">Апартаменты</h2>
+                        </div>
+                        <div class="el__content">
+                            <div class="el__text">Апартаменты</div>
+                            <div class="el__content-left">
+                                <div class="el__description">Приглашаем вас в уютные трёх-этажные апартаменты Terskol Home,
+                                    состоящие из пяти жилых комнат, обеденной зоны с панорамными окнами, кухни,
+                                    лыжехранилища и сушилки-прачечной. В каждой комнате имеется отдельный санузел с душем и
+                                    туалетом. Телевизор 20 общероссийских каналов и высокоскоростной WI-FI<br/>
+                                    Скидки на проживание детям. Если ребёнок дошкольник и не занимает отдельную кровать, то
+                                    его проживание бесплатно.<br/>
+                                    Общая вместимость -&nbsp;15&nbsp;человек.
+                                </div>
+                                <div class="el__price-block">Цена: 1000-1500 руб/чел/сут
+                                    <div class="el__price-comment">Цена зависит от числа проживающих и длительности
+                                        пребывания
+                                    </div>
+                                </div>
+                                <div class="el__order-block">
+                                    <div class="el__order-header">Забронировать</div>
+                                    <div class="el__order-choose">Выберите удобный способ связи</div>
+                                    <div class="el__tab-navs">
+                                        {#<div class="el__tab-nav" data-index="form">Форма</div>#}
+                                    <div class="el__tab-nav is-active" data-index="call">Звонок</div>
+                                    <div class="el__tab-nav" data-index="whatsapp">WhatsApp</div>
+                                    <div class="el__tab-nav" data-index="mail">E-mail</div>
+                                </div>
+                                <div class="el__order-tabs">
+                                    {#<div class="el__order-tab is-form" data-index="form">
+                                        <form action="ajax/sendmail.php" class="mail-form js-validate"
+                                              data-id="apartment">
+                                            <div class="el__order-comment">Заполните форму обратной связи</div>
+                                            <input type="hidden" name="id" value="Апартаменты"/>
+                                            <input type="hidden" name="confirm" value=""/>
+
+                                            <div class="el__input is-fio is-required">
+                                                <input type="text" name="fio" placeholder="Ваше имя"/>
+                                            </div>
+                                            <div class="el__input is-phone is-required">
+                                                <input type="text" name="phone" placeholder="Телефон" class="js-phone"/>
+                                            </div>
+                                            <div class="el__input is-quantity">
+                                                <input type="number" name="quantity" placeholder="Количество мест"/>
+                                            </div>
+                                            <div class="el__input is-from-to">
+                                                <input type="text" name="from" autocomplete="no" placeholder="C"/>
+                                                <input type="text" name="to" autocomplete="no" placeholder="по"/>
+                                            </div>
+
+                                            <div class="el__textarea">
+                                                <textarea name="comment" placeholder="Комментарий"></textarea>
+                                            </div>
+                                            <div class="el__agreement">
+                                                Нажимая на&nbsp;кнопку &laquo;Оправить заявку&raquo;
+                                                вы&nbsp;даете свое согласие на&nbsp;обработку персональных данных
+                                                в&nbsp;соответствии с&nbsp;
+                                                <a href="/agreement.php" target="_blank">Соглашением</a> и&nbsp;с&nbsp;
+                                                <a href="/privacy.php" target="_blank">Политикой в&nbsp;отношении обработки и&nbsp;обеспечения
+                                                    защиты персональных данных.</a>
+                                            </div>
+                                            <button type="submit" class="el__button">Отправить заявку</button>
+                                            <div class="error-message"></div>
+                                        </form>
+                                        <div class="success-message">
+                                            Ваша заявка успешно отправлена. <br/> В ближайшее время с вами свяжутся
+                                        </div>
+                                    </div>#}
+                                <div class="el__order-tab is-active" data-index="call">
+                                    <a href="tel:+79287075517">
+                                        <div class="el__phone">+ 7 928 707 55 17</div>
+                                    </a>
+                                </div>
+                                <div class="el__order-tab" data-index="whatsapp">
+                                    <div class="el__whatsapp">
+                                        <a href="https://wa.me/79287075517">
+                                            Напишите нам в WhatsApp по номеру <b>+ 7 928 707 55 17</b>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="el__order-tab" data-index="mail">
+                                    <div class="el__email">
+                                        <a href="mailto:sapira-terskol@mail.ru">
+                                            Напишите нам на <b> sapira-terskol@mail.ru</b>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="el__content-right">
+                        {#<? if ($VARIABLES['PHOTO']['APARTMENT']) { ?>
+                        <div class="el__photo-slider">
+                            <? foreach ($VARIABLES['PHOTO']['APARTMENT'] as $photo) { ?>
+                            <div class="el__photo-slide">
+                                <img src="<?= $photo['SRC'] ?>" alt="<?= $photo['ALT'] ?>">
+                                <div class="el__photo-caption"><?= $photo['TITLE'] ?></div>
+                            </div>
+                            <? } ?>
+                        </div>
+                        <div class="el__photo-thumb">
+                            <? foreach ($VARIABLES['PHOTO']['APARTMENT'] as $photo) { ?>
+                            <img src="<?= $photo['SRC'] ?>" alt="<?= $photo['ALT'] ?>"
+                                 class="el__photo-thumb-slide">
+                            <? } ?>
+                        </div>
+                        <? } ?>#}
+                    </div>
+                    <div class="el__close-btn"></div>
+                </div>
+            </div>
+        </div>
+        <div class="el__index">
+            <div class="el__index-back">в пятикомнатной трехуровневой квартире</div>
+            <div class="el__index-front">
+                <div class="el__index-overlay" data-index="в пятикомнатной трехуровневой квартире">
+                    в пятикомнатной трехуровневой квартире
+                </div>
+
+                <div class="el__adv-block">
+                    <div class="el__advantage" data-index="Санузел в&nbsp;каждой комнате (душ&nbsp;+&nbsp;туалет)">
+                        Санузел в&nbsp;каждой комнате (душ&nbsp;+&nbsp;туалет)
+                    </div>
+                    <div class="el__advantage" data-index="Лыжехранилище">
+                        Лыжехранилище
+                    </div>
+                    <div class="el__advantage" data-index="Обеденная зона">
+                        Обеденная зона
+                    </div>
+                    <div class="el__advantage" data-index="Постирочная комната (прачечная)">
+                        Постирочная комната (прачечная)
+                    </div>
+                    <div class="el__advantage" data-index="Машиноместо">
+                        Машиноместо
+                    </div>
+                    <div class="el__advantage" data-index="Телевизор">
+                        Телевизор
+                    </div>
+                    <div class="el__advantage" data-index="WI-FI">
+                        WI-FI
+                    </div>
+                </div>
+                <div class="el__price" data-index="Цена: 1000-1500 руб/чел/сут">
+                    Цена: 1000-1500 руб/чел/сут
+                </div>
+                <div class="el__more" data-index="Подробнее">
+                    Подробнее
+                </div>
+                <div class="el__order" data-index="Забронировать">
+                    Забронировать
+                </div>
+            </div>
+        </div>
+    </div>
+            <!-- el end -->
+            <!-- el start -->
+            <div class="el">
+                <div class="el__overflow">
+                    <div class="el__inner">
+                        <div class="el__bg"></div>
+                        <div class="el__preview-cont">
+                            <h2 class="el__heading">Хостел</h2>
+                        </div>
+                        <div class="el__content">
+                            <div class="el__text">Хостел</div>
+                            <div class="el__content-left">
+                                <div class="el__description">
+                                    Уютный хостел Terskol Home с большой кухней и всем необходимым. Две четырехместные и
+                                    одна трехместная комнаты,
+                                    душ, туалет, стиральная машина. WI-FI.<br/>
+                                    Скидки на проживание детям. Если ребёнок дошкольник и не занимает отдельную кровать, то
+                                    его проживание бесплатно.<br/>
+                                    Общая вместимость -&nbsp;11&nbsp;человек.
+                                </div>
+                                <div class="el__price-block">Цена: 400-500 руб/чел/сут
+                                    <div class="el__price-comment">Цена зависит от числа проживающих и длительности
+                                        пребывания
+                                    </div>
+                                </div>
+                                <div class="el__order-block">
+                                    <div class="el__order-header">Забронировать</div>
+                                    <div class="el__order-choose">Выберите удобный способ связи</div>
+                                    <div class="el__tab-navs">
+                                        {#<div class="el__tab-nav" data-index="form">Форма</div>#}
+                                        <div class="el__tab-nav is-active" data-index="call">Звонок</div>
+                                        <div class="el__tab-nav" data-index="whatsapp">WhatsApp</div>
+                                        <div class="el__tab-nav" data-index="mail">E-mail</div>
+                                    </div>
+                                <div class="el__order-tabs">
+                                   {# <div class="el__order-tab is-form" data-index="form">
+                                        <form action="ajax/sendmail.php" class="mail-form js-validate" data-id="hostel">
+                                            <div class="el__order-comment">Заполните форму обратной связи</div>
+                                            <input type="hidden" name="id" value="Хостел"/>
+                                            <input type="hidden" name="confirm" value=""/>
+
+                                            <div class="el__input is-fio is-required">
+                                                <input type="text" name="fio" placeholder="Ваше имя"/>
+                                            </div>
+                                            <div class="el__input is-phone is-required">
+                                                <input type="text" name="phone" placeholder="Телефон" class="js-phone"/>
+                                            </div>
+                                            <div class="el__input is-quantity">
+                                                <input type="number" name="quantity" placeholder="Количество мест"/>
+                                            </div>
+                                            <div class="el__input is-from-to">
+                                                <input type="text" name="from" autocomplete="no" placeholder="C"/>
+                                                <input type="text" name="to" autocomplete="no" placeholder="по"/>
+                                            </div>
+
+                                            <div class="el__textarea">
+                                                <textarea name="comment" placeholder="Комментарий"></textarea>
+                                            </div>
+                                            <div class="el__agreement">
+                                                Нажимая на&nbsp;кнопку &laquo;Оправить заявку&raquo;
+                                                вы&nbsp;даете свое согласие на&nbsp;обработку персональных данных
+                                                в&nbsp;соответствии с&nbsp;
+                                                <a href="/agreement.php" target="_blank">Соглашением</a> и&nbsp;с&nbsp;
+                                                <a href="/privacy.php" target="_blank">Политикой в&nbsp;отношении обработки и&nbsp;обеспечения
+                                                    защиты персональных данных.</a>
+                                            </div>
+                                            <button type="submit" class="el__button">Отправить заявку</button>
+                                            <div class="error-message"></div>
+                                        </form>
+                                        <div class="success-message">
+                                            Ваша заявка успешно отправлена. <br/> В ближайшее время с вами свяжутся
+                                        </div>
+                                    </div>#}
+                                <div class="el__order-tab is-active" data-index="call">
+                                    <a href="tel:+79287075517">
+                                        <div class="el__phone">+ 7 928 707 55 17</div>
+                                    </a>
+                                </div>
+                                <div class="el__order-tab" data-index="whatsapp">
+                                    <div class="el__whatsapp">
+                                        <a href="https://wa.me/79287075517">
+                                            Напишите нам в WhatsApp по номеру <b>+ 7 928 707 55 17</b>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="el__order-tab" data-index="mail">
+                                    <div class="el__email">
+                                        <a href="mailto:sapira-terskol@mail.ru">
+                                            Напишите нам на <b> sapira-terskol@mail.ru</b>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="el__content-right">
+                       {# <? if ($VARIABLES['PHOTO']['HOSTEL']) { ?>
+                        <div class="el__photo-slider">
+                            <? foreach ($VARIABLES['PHOTO']['HOSTEL'] as $photo) { ?>
+                            <div class="el__photo-slide">
+                                <img src="<?= $photo['SRC'] ?>" alt="<?= $photo['ALT'] ?>">
+                                <div class="el__photo-caption"><?= $photo['TITLE'] ?></div>
+                            </div>
+                            <? } ?>
+                        </div>
+                        <div class="el__photo-thumb">
+                            <? foreach ($VARIABLES['PHOTO']['HOSTEL'] as $photo) { ?>
+                            <img src="<?= $photo['SRC'] ?>" alt="<?= $photo['ALT'] ?>"
+                                 class="el__photo-thumb-slide">
+                            <? } ?>
+                        </div>
+                        <? } ?>#}
+                    </div>
+                    <div class="el__close-btn"></div>
+                </div>
+            </div>
+            </div>
+            <div class="el__index">
+                <div class="el__index-back">с тремя номерами</div>
+                <div class="el__index-front">
+                    <div class="el__index-overlay" data-index="с тремя номерами">
+                        с тремя номерами
+                    </div>
+                    <div class="el__adv-block">
+                        <div class="el__advantage" data-index="Душ, туалет">
+                            Душ, туалет
+                        </div>
+                        <div class="el__advantage" data-index="Кухня">
+                            Кухня
+                        </div>
+                        <div class="el__advantage" data-index="Стиральная машина">
+                            Стиральная машина
+                        </div>
+                        <div class="el__advantage" data-index="Машиноместо">
+                            Машиноместо
+                        </div>
+                        <div class="el__advantage" data-index="WI-FI">
+                            WI-FI
+                        </div>
+                    </div>
+                    <div class="el__price" data-index="Цена: 400-500 руб/чел/сут">
+                        Цена: 400-500 руб/чел/сут
+                    </div>
+                    <div class="el__more" data-index="Подробнее">
+                        Подробнее
+                    </div>
+                    <div class="el__order" data-index="Забронировать">
+                        Забронировать
+                    </div>
+                </div>
+            </div>
+            </div>
+            <!-- el end -->
+            <!-- el start -->
+            <div class="el">
+                <div class="el__overflow">
+                    <div class="el__inner">
+                        <div class="el__bg"></div>
+                        <div class="el__preview-cont">
+                            <h2 class="el__heading">Коттедж "Сапира"</h2>
+                        </div>
+                        <div class="el__content">
+                            <div class="el__text">Коттедж "Сапира"</div>
+                            <div class="el__content-left">
+                                <div class="el__description">
+                                    Коттедж "Сапира" - уютный домик с настоящей историей, ставший
+                                    местом постоянного отдыха для многих туристов.
+                                    Две кухни на втором и третьем этажах, душевые кабинки, туалеты, прачечная, WI-FI.<br/>
+                                    Скидки на проживание детям. Если ребёнок дошкольник и не занимает отдельную кровать, то
+                                    его проживание бесплатно.<br/>
+                                    Общая вместимость -&nbsp;21-25&nbsp;человек.
+                                </div>
+                                <div class="el__price-block">Цена: 600-800 руб/чел/сут
+                                    <div class="el__price-comment">Цена зависит от числа проживающих и длительности
+                                        пребывания
+                                    </div>
+                                </div>
+                                <div class="el__order-block">
+                                    <div class="el__order-header">Забронировать</div>
+                                    <div class="el__order-choose">Выберите удобный способ связи</div>
+                                    <div class="el__tab-navs">
+                                       {# <div class="el__tab-nav" data-index="form">Форма</div>#}
+                                        <div class="el__tab-nav is-active" data-index="call">Звонок</div>
+                                        <div class="el__tab-nav" data-index="whatsapp">WhatsApp</div>
+                                        <div class="el__tab-nav" data-index="mail">E-mail</div>
+                                    </div>
+                                <div class="el__order-tabs">
+                                    {#<?/*<div class="el__order-tab is-form" data-index="form">
+                                        <form action="ajax/sendmail.php" class="mail-form js-validate"
+                                              data-id="cottage">
+                                            <div class="el__order-comment">Заполните форму обратной связи</div>
+                                            <input type="hidden" name="id" value='Коттедж "Сапиира"'/>
+                                            <input type="hidden" name="confirm" value=""/>
+
+                                            <div class="el__input is-fio is-required">
+                                                <input type="text" name="fio" placeholder="Ваше имя"/>
+                                            </div>
+                                            <div class="el__input is-phone is-required">
+                                                <input type="text" name="phone" placeholder="Телефон" class="js-phone"/>
+                                            </div>
+                                            <div class="el__input is-quantity">
+                                                <input type="number" name="quantity" placeholder="Количество мест"/>
+                                            </div>
+                                            <div class="el__input is-from-to">
+                                                <input type="text" name="from" lang="ru" autocomplete="no"
+                                                       placeholder="C"/>
+                                                <input type="text" name="to" lang="ru" autocomplete="no"
+                                                       placeholder="по"/>
+                                            </div>
+
+                                            <div class="el__textarea">
+                                                <textarea name="comment" placeholder="Комментарий"></textarea>
+                                            </div>
+                                            <div class="el__agreement">
+                                                Нажимая на&nbsp;кнопку &laquo;Оправить заявку&raquo;
+                                                вы&nbsp;даете свое согласие на&nbsp;обработку персональных данных
+                                                в&nbsp;соответствии с&nbsp;
+                                                <a href="/agreement.php" target="_blank">Соглашением</a> и&nbsp;с&nbsp;
+                                                <a href="/privacy.php" target="_blank">Политикой в&nbsp;отношении обработки и&nbsp;обеспечения
+                                                    защиты персональных данных.</a>
+                                            </div>
+                                            <button type="submit" class="el__button">Отправить заявку</button>
+                                            <div class="error-message"></div>
+                                        </form>
+                                        <div class="success-message">
+                                            Ваша заявка успешно отправлена. <br/> В ближайшее время с вами свяжутся
+                                        </div>
+                                    </div>*/?>#}
+                                <div class="el__order-tab is-active" data-index="call">
+                                    <a href="tel:+79287075517">
+                                        <div class="el__phone">+ 7 928 707 55 17</div>
+                                    </a>
+                                </div>
+                                <div class="el__order-tab" data-index="whatsapp">
+                                    <div class="el__whatsapp">
+                                        <a href="https://wa.me/79287075517">
+                                            Напишите нам в WhatsApp по номеру <b>+ 7 928 707 55 17</b>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="el__order-tab" data-index="mail">
+                                    <div class="el__email">
+                                        <a href="mailto:sapira-terskol@mail.ru">
+                                            Напишите нам на <b> sapira-terskol@mail.ru</b>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="el__content-right">
+                       {# <? if ($VARIABLES['PHOTO']['COTTAGE']) { ?>
+                        <div class="el__photo-slider">
+                            <? foreach ($VARIABLES['PHOTO']['COTTAGE'] as $photo) { ?>
+                            <div class="el__photo-slide">
+                                <img src="<?= $photo['SRC'] ?>" alt="<?= $photo['ALT'] ?>">
+                                <div class="el__photo-caption"><?= $photo['TITLE'] ?></div>
+                            </div>
+                            <? } ?>
+                        </div>
+                        <div class="el__photo-thumb">
+                            <? foreach ($VARIABLES['PHOTO']['COTTAGE'] as $photo) { ?>
+                            <img src="<?= $photo['SRC'] ?>" alt="<?= $photo['ALT'] ?>"
+                                 class="el__photo-thumb-slide">
+                            <? } ?>
+                        </div>
+                        <? } ?>#}
+                    </div>
+                    <div class="el__close-btn"></div>
+                </div>
+            </div>
+            </div>
+            <div class="el__index">
+                <div class="el__index-back">дешево, просто, уютно</div>
+                <div class="el__index-front">
+                    <div class="el__index-overlay" data-index="дешево, просто, уютно">
+                        дешево, просто,уютно
+                    </div>
+                    <div class="el__adv-block">
+                        <div class="el__advantage" data-index="Душевые, туалеты">
+                            Душевые, туалеты
+                        </div>
+                        <div class="el__advantage" data-index="Две кухни">
+                            Две кухни
+                        </div>
+                        <div class="el__advantage" data-index="Стиральная машина">
+                            Стиральная машина
+                        </div>
+                        <div class="el__advantage" data-index="Машиноместо">
+                            Машиноместо
+                        </div>
+                        <div class="el__advantage" data-index="WI-FI">
+                            WI-FI
+                        </div>
+                    </div>
+                    <div class="el__price" data-index="Цена: 600-800 руб/чел/сут">
+                        Цена: 600-800 руб/чел/сут
+                    </div>
+                    <div class="el__more" data-index="Подробнее">
+                        Подробнее
+                    </div>
+                    <div class="el__order" data-index="Забронировать">
+                        Забронировать
+                    </div>
+                </div>
+            </div>
+            </div>
+            <!-- el end -->
+            <!-- el start -->
+            <div class="el">
+                <div class="el__overflow">
+                    <div class="el__inner">
+                        <div class="el__bg"></div>
+                        <div class="el__preview-cont">
+                            <h2 class="el__heading">Трансфер</h2>
+                        </div>
+                        <div class="el__content">
+                            <div class="el__text">Трансфер. Такси</div>
+                            <div class="el__content-left">
+                                <div class="el__description">
+                                    Трансфер от/до аэропорта или из другой точки.
+                                </div>
+                                <div class="el__price-block">Цена: в зависимости от маршрута</div>
+                                <div class="el__order-block">
+                                    <div class="el__order-header">Заказать</div>
+                                    <div class="el__order-choose">Выберите удобный способ связи</div>
+                                    <div class="el__tab-navs">
+                                        {#<div class="el__tab-nav" data-index="form">Форма</div>#}
+                                        <div class="el__tab-nav is-active" data-index="call">Звонок</div>
+                                        <div class="el__tab-nav" data-index="whatsapp">WhatsApp</div>
+                                        <div class="el__tab-nav" data-index="mail">E-mail</div>
+                                    </div>
+                                <div class="el__order-tabs">
+                                    {#<?/*<div class="el__order-tab is-form" data-index="form">
+                                        <form action="ajax/sendmail.php" class="mail-form js-validate" data-id="taxi">
+                                            <div class="el__order-comment">Заполните форму обратной связи</div>
+                                            <input type="hidden" name="id" value='Такси'/>
+                                            <input type="hidden" name="confirm" value=""/>
+
+                                            <div class="el__input is-fio is-required">
+                                                <input type="text" name="fio" placeholder="Ваше имя"/>
+                                            </div>
+                                            <div class="el__input is-phone is-required">
+                                                <input type="text" name="phone" placeholder="Телефон" class="js-phone"/>
+                                            </div>
+                                            <div class="el__textarea">
+                                                <textarea name="comment" placeholder="Откуда-куда"></textarea>
+                                            </div>
+                                            <div class="el__agreement">
+                                                Нажимая на&nbsp;кнопку &laquo;Оправить заявку&raquo;
+                                                вы&nbsp;даете свое согласие на&nbsp;обработку персональных данных
+                                                в&nbsp;соответствии с&nbsp;
+                                                <a href="/agreement.php" target="_blank">Соглашением</a> и&nbsp;с&nbsp;
+                                                <a href="/privacy.php" target="_blank">Политикой в&nbsp;отношении обработки и&nbsp;обеспечения
+                                                    защиты персональных данных.</a>
+                                            </div>
+                                            <button type="submit" class="el__button">Отправить заявку</button>
+                                            <div class="error-message"></div>
+                                        </form>
+                                        <div class="success-message">
+                                            Ваша заявка успешно отправлена. <br/> В ближайшее время с вами свяжутся
+                                        </div>
+                                    </div>*/?>#}
+                                <div class="el__order-tab is-active" data-index="call">
+                                    <a href="tel:+79287075517">
+                                        <div class="el__phone">+ 7 928 707 55 17</div>
+                                    </a>
+                                </div>
+                                <div class="el__order-tab" data-index="whatsapp">
+                                    <div class="el__whatsapp">
+                                        <a href="https://wa.me/79287075517">
+                                            Напишите нам в WhatsApp по номеру <b>+ 7 928 707 55 17</b>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="el__order-tab" data-index="mail">
+                                    <div class="el__email">
+                                        <a href="mailto:sapira-terskol@mail.ru">
+                                            Напишите нам на <b> sapira-terskol@mail.ru</b>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="el__close-btn"></div>
+                </div>
+            </div>
+            </div>
+            <div class="el__index">
+                <div class="el__index-back">от/до аэропопрта</div>
+                <div class="el__index-front">
+                    <div class="el__index-overlay" data-index="от/до аэропопрта">
+                        от/до аэропопрта
+                    </div>
+
+                    <div class="el__price" data-index="Цена: в зависимости от маршрута">
+                        Цена: в зависимости от маршрута
+                    </div>
+                    <div class="el__more" data-index="Подробнее">
+                        Подробнее
+                    </div>
+                    <div class="el__order" data-index="Заказать">
+                        Заказать
+                    </div>
+                </div>
+            </div>
+            </div>
+            <!-- el end -->
+
+        </div>
+        <!-- cont inner end -->
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

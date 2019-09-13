@@ -5,8 +5,4 @@
 # TestController
 index:
     path: /
-    controller: App\Controller\TestController::Hello
-# NumberController
-lucky_number:
-    path: /number/
-    controller: App\Controller\NumberController::Number
+    controller: App\Controller\MainController::Index
