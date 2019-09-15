@@ -1,0 +1,20 @@
+{{ form_start(form) }}
+    {#{{ form_widget(form) }}#}
+    {{ form_errors(form) }}
+    <div class="form-group">
+        {{ form_label(form.Section_id) }}
+        {{ form_errors(form.Section_id) }}
+        {{ form_widget(form.Section_id, {'attr': {'class': 'form-control', 'rows' : 8}}) }}
+        {{ form_help(form.Section_id) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.Path) }}
+        {{ form_errors(form.Path) }}
+        {{ form_widget(form.Path, {'attr': {'class': 'form-control', 'rows' : 8}}) }}
+        {{ form_help(form.Path) }}
+    </div>
+    <div class="form-group">
+        <button class="btn">{{ button_label| default( 'Сохранить' ) }}</button>
+    </div>
+    {#<button class="btn">{{ button_label|default('Save') }}</button>#}
+{{ form_end(form) }}

@@ -6,6 +6,10 @@
                 <source>Test phrase to translate</source>
                 <target>Золотая</target>
             </trans-unit>
+            <trans-unit id="Create new">
+                <source>Create new</source>
+                <target>Создать новую запись</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
