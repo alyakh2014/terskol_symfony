@@ -8,9 +8,9 @@
 
 namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response,
-    Symfony\Bundle\FrameworkBundle\Controller\Controller;
+    Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class MainController extends Controller
+class MainController extends AbstractController
 {
     public function Index(){
         return $this->render('main/index.html.twig', array());

@@ -11,8 +11,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Section;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @Route("/images")
@@ -32,27 +33,30 @@ class ImagesController extends AbstractController
     /**
      * @Route("/new", name="images_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Images $image): Response
     {
         $image = new Images();
         $sections = [];
-        $sectionsAr = $this->getDoctrine()->getRepository(Section::class)->findAll();
+        $sectionDoctrine = $this->getDoctrine()->getRepository(Section::class);
+        $sectionsAr = $sectionDoctrine->findAll();
         foreach($sectionsAr as $section){
             $sections[$section->getTitle()] = $section->getId();
         }
-        /*$form = $this->createForm(ImagesType::class, $image);*/
         $form = $this->createFormBuilder($image)
             ->add('Section_id', ChoiceType::class, array( 'choices'=>array($sections)))
-            ->add('Path', TextType::class)
-            ->add('save', SubmitType::class, array('label'=>'Submit'))
+            ->add('Path', FileType::class)
             ->getForm();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $sectionDir = $sectionDoctrine->findBy(["id" => $form['Section_id']->getData()])[0]->getCode();
+            $fileName = $form['Path']->getData()->getClientOriginalName();
+            $extractDir = 'img/'.$sectionDir;
+            $image->setPath($extractDir.'/'.$fileName);
+            $form['Path']->getData()->move($extractDir, $fileName);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($image);
             $entityManager->flush();
-
             return $this->redirectToRoute('images_index');
         }
 
@@ -78,7 +82,17 @@ class ImagesController extends AbstractController
      */
     public function edit(Request $request, Images $image): Response
     {
-        $form = $this->createForm(ImagesType::class, $image);
+        $image = new Images();
+        $sections = [];
+        $sectionDoctrine = $this->getDoctrine()->getRepository(Section::class);
+        $sectionsAr = $sectionDoctrine->findAll();
+        foreach($sectionsAr as $section){
+            $sections[$section->getTitle()] = $section->getId();
+        }
+        $form = $this->createFormBuilder($image)
+            ->add('Section_id', ChoiceType::class, array( 'choices'=>array($sections)))
+            ->add('Path', FileType::class)
+            ->getForm();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -90,6 +104,7 @@ class ImagesController extends AbstractController
         return $this->render('images/edit.html.twig', [
             'image' => $image,
             'form' => $form->createView(),
+            'sections' => $sections,
         ]);
     }
 
