@@ -8,11 +8,17 @@
         {{ form_help(form.Section_id) }}
     </div>
     <div class="form-group">
-        {{ form_label(form.Path) }}
+
         {{ form_errors(form.Path) }}
-        {{ form_widget(form.Path, {'attr': {'class': 'form-control', 'rows' : 8}}) }}
+        {% if method == 'edit'%}
+        {{ form_widget(form.Path, {'attr': {'class': 'form-control', 'rows' : 8, 'type': 'hidden'}}) }}
+        {%else%}
+            {{ form_label(form.Path) }}
+            {{ form_widget(form.Path, {'attr': {'class': 'form-control', 'rows' : 8}}) }}
+        {% endif %}
         {{ form_help(form.Path) }}
     </div>
+
     <div class="form-group">
         <button class="btn">{{ button_label| default( 'Сохранить' ) }}</button>
     </div>

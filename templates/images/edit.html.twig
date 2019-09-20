@@ -1,13 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Images{% endblock %}
+{% block title %}{{ 'Edit Images' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Edit Images</h1>
+    <h1>{{ 'Edit Images' | trans }}</h1>
+
+    {{ form_start(form, {'attr' : {'id' : 'image_user_form'}}) }}
+    {{ form_errors(form) }}
+
+    <div class="form-group">
+        <img src='{{ asset(imgPath) }}' class="img-fluid" alt="">
+    </div>
 
     {{ include('images/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('images_index') }}">back to list</a>
+    <a href="{{ path('images_index') }}">{{ 'back to list' | trans }}</a>
 
     {{ include('images/_delete_form.html.twig') }}
+    {{ form_end(form) }}
+
 {% endblock %}

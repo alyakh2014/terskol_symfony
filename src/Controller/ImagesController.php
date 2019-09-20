@@ -14,6 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 /**
  * @Route("/images")
@@ -33,7 +35,7 @@ class ImagesController extends AbstractController
     /**
      * @Route("/new", name="images_new", methods={"GET","POST"})
      */
-    public function new(Request $request, Images $image): Response
+    public function new(Request $request): Response
     {
         $image = new Images();
         $sections = [];
@@ -64,6 +66,7 @@ class ImagesController extends AbstractController
             'image' => $image,
             'form' => $form->createView(),
             'sections' => $sections,
+            'method'=>'new'
         ]);
     }
 
@@ -82,7 +85,7 @@ class ImagesController extends AbstractController
      */
     public function edit(Request $request, Images $image): Response
     {
-        $image = new Images();
+        //$image = new Images();
         $sections = [];
         $sectionDoctrine = $this->getDoctrine()->getRepository(Section::class);
         $sectionsAr = $sectionDoctrine->findAll();
@@ -91,7 +94,7 @@ class ImagesController extends AbstractController
         }
         $form = $this->createFormBuilder($image)
             ->add('Section_id', ChoiceType::class, array( 'choices'=>array($sections)))
-            ->add('Path', FileType::class)
+            ->add('Path', HiddenType::class)
             ->getForm();
         $form->handleRequest($request);
 
@@ -103,8 +106,9 @@ class ImagesController extends AbstractController
 
         return $this->render('images/edit.html.twig', [
             'image' => $image,
+            'imgPath'=>$image->getPath(),
             'form' => $form->createView(),
-            'sections' => $sections,
+            'method'=>'edit'
         ]);
     }
 
@@ -121,4 +125,5 @@ class ImagesController extends AbstractController
 
         return $this->redirectToRoute('images_index');
     }
+
 }
