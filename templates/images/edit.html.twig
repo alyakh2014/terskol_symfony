@@ -8,11 +8,22 @@
     {{ form_start(form, {'attr' : {'id' : 'image_user_form'}}) }}
     {{ form_errors(form) }}
 
+    {% for message in app.flashes('file_exists') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <div class="form-group">
         <img src='{{ asset(imgPath) }}' class="img-fluid" alt="">
     </div>
-
-    {{ include('images/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="form-group">
+        {{ form_label(form.PathNew) }}
+        {{ form_errors(form.PathNew) }}
+        {{ form_widget(form.PathNew, {'attr': {'class': 'form-control', 'rows' : 8}}) }}
+        {{ form_help(form.PathNew) }}
+    </div>
+    {{ include('images/_form.html.twig') }}
 
     <a href="{{ path('images_index') }}">{{ 'back to list' | trans }}</a>
 

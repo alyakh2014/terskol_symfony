@@ -1,6 +1,7 @@
 {{ form_start(form) }}
     {#{{ form_widget(form) }}#}
-    {{ form_errors(form) }}
+
+   {{ form_errors(form) }}
     <div class="form-group">
         {{ form_label(form.Section_id) }}
         {{ form_errors(form.Section_id) }}
@@ -18,6 +19,10 @@
         {% endif %}
         {{ form_help(form.Path) }}
     </div>
+
+{#    {% if method == 'edit'%}
+        <input type="file" id="form_NewPath" name="form[NewPath]">
+    {% endif %}#}
 
     <div class="form-group">
         <button class="btn">{{ button_label| default( 'Сохранить' ) }}</button>

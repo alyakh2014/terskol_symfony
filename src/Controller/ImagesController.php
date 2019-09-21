@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @Route("/images")
@@ -85,7 +86,7 @@ class ImagesController extends AbstractController
      */
     public function edit(Request $request, Images $image): Response
     {
-        //$image = new Images();
+
         $sections = [];
         $sectionDoctrine = $this->getDoctrine()->getRepository(Section::class);
         $sectionsAr = $sectionDoctrine->findAll();
@@ -95,12 +96,38 @@ class ImagesController extends AbstractController
         $form = $this->createFormBuilder($image)
             ->add('Section_id', ChoiceType::class, array( 'choices'=>array($sections)))
             ->add('Path', HiddenType::class)
+            ->add('PathNew', FileType::class, ['mapped' => false, 'required' => true])
             ->getForm();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
 
+            $sectionDir = $sectionDoctrine->findBy(["id" => $form['Section_id']->getData()])[0]->getCode();
+            $pathNew = $request->files->get('form')['PathNew'];
+            $fileName = $pathNew->getClientOriginalName();
+            $extractDir = 'img/'.$sectionDir;
+            $filesystem = new FileSystem();
+            //Check wether file is exists
+            if($filesystem->exists($extractDir.'/'.$fileName)){
+                $this->addFlash(
+                    'file_exists',
+                    'Файл с таким названием уже существует. Он может быть удалён!'
+                );
+                return $this->redirectToRoute('images_edit', ['id' => $request->get("id")]);
+            }
+
+            // remove old image
+            $oldFilePath = $form['Path']->getData();
+            if($filesystem->exists($oldFilePath)){
+                $filesystem->remove([$oldFilePath]);
+            }
+
+            $image->setPath($extractDir.'/'.$fileName);
+
+            $pathNew->move($extractDir, $fileName);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($image);
+            $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('images_index');
         }
 
@@ -118,6 +145,11 @@ class ImagesController extends AbstractController
     public function delete(Request $request, Images $image): Response
     {
         if ($this->isCsrfTokenValid('delete'.$image->getId(), $request->request->get('_token'))) {
+            $imagePath = $image->getPath();
+            $filesystem = new FileSystem();
+            if($filesystem->exists($imagePath)){
+                $filesystem->remove([$imagePath]);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($image);
             $entityManager->flush();
