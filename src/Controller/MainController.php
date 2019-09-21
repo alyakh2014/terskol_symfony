@@ -26,4 +26,10 @@ class MainController extends AbstractController
         }
         return $this->render('main/index.html.twig', array('Sections'=>$sectionsAr));
     }
+
+
+    public function Test(){
+
+        return $this->render('main/test.html');
+    }
 }

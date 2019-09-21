@@ -6,3 +6,8 @@
 index:
     path: /
     controller: App\Controller\MainController::Index
+
+
+indextest:
+    path: /test
+    controller: App\Controller\MainController::Test

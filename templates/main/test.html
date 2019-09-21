@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="input">
+    <form v-on:submit.prevent="celcium">
+        <input v-model="temperature"/> Input temperatures in F
+        <button>Добавить</button>
+    </form>
+    <ul>
+        <li v-for="item in items">
+            {{"{{item}}"}}
+        </li>
+    </ul>
+</div>
+
+<script>
+
+    var obj = new Vue({
+        el: "#input",
+        data: {
+            temperature: '',
+            items: []
+        },
+        methods: {
+            celcium: function () {
+                if (this.temperature == '') return '';
+                this.items.push((this.temperature - 32) * (5 / 9));
+                this.temperature = '';
+            }
+        }
+    });
+
+</script>
+</body>
+</html>
