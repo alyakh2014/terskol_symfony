@@ -66,25 +66,20 @@
             </div>
             <!-- el end -->
             <!-- el start -->
+            {% for section in Sections %}
             <div class="el">
                 <div class="el__overflow">
                     <div class="el__inner">
                         <div class="el__bg"></div>
                         <div class="el__preview-cont">
-                            <h2 class="el__heading">Апартаменты</h2>
+                            <h2 class="el__heading">{{section.Title}}</h2>
                         </div>
                         <div class="el__content">
-                            <div class="el__text">Апартаменты</div>
+                            <div class="el__text">{{section["Title"]}}</div>
                             <div class="el__content-left">
-                                <div class="el__description">Приглашаем вас в уютные трёх-этажные апартаменты Terskol Home,
-                                    состоящие из пяти жилых комнат, обеденной зоны с панорамными окнами, кухни,
-                                    лыжехранилища и сушилки-прачечной. В каждой комнате имеется отдельный санузел с душем и
-                                    туалетом. Телевизор 20 общероссийских каналов и высокоскоростной WI-FI<br/>
-                                    Скидки на проживание детям. Если ребёнок дошкольник и не занимает отдельную кровать, то
-                                    его проживание бесплатно.<br/>
-                                    Общая вместимость -&nbsp;15&nbsp;человек.
+                                <div class="el__description">{{section["Description"]}}
                                 </div>
-                                <div class="el__price-block">Цена: 1000-1500 руб/чел/сут
+                                <div class="el__price-block">Цена: {{section["Price"]}}
                                     <div class="el__price-comment">Цена зависит от числа проживающих и длительности
                                         пребывания
                                     </div>
@@ -161,22 +156,22 @@
                         </div>
                     </div>
                     <div class="el__content-right">
-                        {#<? if ($VARIABLES['PHOTO']['APARTMENT']) { ?>
-                        <div class="el__photo-slider">
-                            <? foreach ($VARIABLES['PHOTO']['APARTMENT'] as $photo) { ?>
-                            <div class="el__photo-slide">
-                                <img src="<?= $photo['SRC'] ?>" alt="<?= $photo['ALT'] ?>">
-                                <div class="el__photo-caption"><?= $photo['TITLE'] ?></div>
+                        {% if section["Images"] is defined %}
+                            <div class="el__photo-slider">
+                                {% for img in section["Images"]  %}
+                                <div class="el__photo-slide">
+                                    <img src="{{ asset(img) }}">
+                                </div>
+                                {% endfor %}
                             </div>
-                            <? } ?>
-                        </div>
-                        <div class="el__photo-thumb">
-                            <? foreach ($VARIABLES['PHOTO']['APARTMENT'] as $photo) { ?>
-                            <img src="<?= $photo['SRC'] ?>" alt="<?= $photo['ALT'] ?>"
-                                 class="el__photo-thumb-slide">
-                            <? } ?>
-                        </div>
-                        <? } ?>#}
+                            <div class="el__photo-thumb">
+                                {% for img in section.Images  %}
+                                    <div class="el__photo-slide">
+                                        <img src="{{ asset(img) }}" class="el__photo-thumb-slide">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="el__close-btn"></div>
                 </div>
@@ -212,8 +207,8 @@
                         WI-FI
                     </div>
                 </div>
-                <div class="el__price" data-index="Цена: 1000-1500 руб/чел/сут">
-                    Цена: 1000-1500 руб/чел/сут
+                <div class="el__price" data-index="Цена: {{section.Price}}">
+                    Цена: {{ section.Price }}
                 </div>
                 <div class="el__more" data-index="Подробнее">
                     Подробнее
@@ -224,9 +219,10 @@
             </div>
         </div>
     </div>
+            {% endfor %}
             <!-- el end -->
             <!-- el start -->
-            <div class="el">
+            {#<div class="el">
                 <div class="el__overflow">
                     <div class="el__inner">
                         <div class="el__bg"></div>
@@ -253,13 +249,13 @@
                                     <div class="el__order-header">Забронировать</div>
                                     <div class="el__order-choose">Выберите удобный способ связи</div>
                                     <div class="el__tab-navs">
-                                        {#<div class="el__tab-nav" data-index="form">Форма</div>#}
+                                        #}{#<div class="el__tab-nav" data-index="form">Форма</div>#}{#
                                         <div class="el__tab-nav is-active" data-index="call">Звонок</div>
                                         <div class="el__tab-nav" data-index="whatsapp">WhatsApp</div>
                                         <div class="el__tab-nav" data-index="mail">E-mail</div>
                                     </div>
                                 <div class="el__order-tabs">
-                                   {# <div class="el__order-tab is-form" data-index="form">
+                                   #}{# <div class="el__order-tab is-form" data-index="form">
                                         <form action="ajax/sendmail.php" class="mail-form js-validate" data-id="hostel">
                                             <div class="el__order-comment">Заполните форму обратной связи</div>
                                             <input type="hidden" name="id" value="Хостел"/>
@@ -296,7 +292,7 @@
                                         <div class="success-message">
                                             Ваша заявка успешно отправлена. <br/> В ближайшее время с вами свяжутся
                                         </div>
-                                    </div>#}
+                                    </div>#}{#
                                 <div class="el__order-tab is-active" data-index="call">
                                     <a href="tel:+79287075517">
                                         <div class="el__phone">+ 7 928 707 55 17</div>
@@ -320,7 +316,7 @@
                         </div>
                     </div>
                     <div class="el__content-right">
-                       {# <? if ($VARIABLES['PHOTO']['HOSTEL']) { ?>
+                       #}{# <? if ($VARIABLES['PHOTO']['HOSTEL']) { ?>
                         <div class="el__photo-slider">
                             <? foreach ($VARIABLES['PHOTO']['HOSTEL'] as $photo) { ?>
                             <div class="el__photo-slide">
@@ -335,7 +331,7 @@
                                  class="el__photo-thumb-slide">
                             <? } ?>
                         </div>
-                        <? } ?>#}
+                        <? } ?>#}{#
                     </div>
                     <div class="el__close-btn"></div>
                 </div>
@@ -375,10 +371,10 @@
                     </div>
                 </div>
             </div>
-            </div>
+            </div>#}
             <!-- el end -->
             <!-- el start -->
-            <div class="el">
+            {#<div class="el">
                 <div class="el__overflow">
                     <div class="el__inner">
                         <div class="el__bg"></div>
@@ -405,13 +401,13 @@
                                     <div class="el__order-header">Забронировать</div>
                                     <div class="el__order-choose">Выберите удобный способ связи</div>
                                     <div class="el__tab-navs">
-                                       {# <div class="el__tab-nav" data-index="form">Форма</div>#}
+                                       #}{# <div class="el__tab-nav" data-index="form">Форма</div>#}{#
                                         <div class="el__tab-nav is-active" data-index="call">Звонок</div>
                                         <div class="el__tab-nav" data-index="whatsapp">WhatsApp</div>
                                         <div class="el__tab-nav" data-index="mail">E-mail</div>
                                     </div>
                                 <div class="el__order-tabs">
-                                    {#<?/*<div class="el__order-tab is-form" data-index="form">
+                                    #}{#<?/*<div class="el__order-tab is-form" data-index="form">
                                         <form action="ajax/sendmail.php" class="mail-form js-validate"
                                               data-id="cottage">
                                             <div class="el__order-comment">Заполните форму обратной связи</div>
@@ -451,7 +447,7 @@
                                         <div class="success-message">
                                             Ваша заявка успешно отправлена. <br/> В ближайшее время с вами свяжутся
                                         </div>
-                                    </div>*/?>#}
+                                    </div>*/?>#}{#
                                 <div class="el__order-tab is-active" data-index="call">
                                     <a href="tel:+79287075517">
                                         <div class="el__phone">+ 7 928 707 55 17</div>
@@ -475,7 +471,7 @@
                         </div>
                     </div>
                     <div class="el__content-right">
-                       {# <? if ($VARIABLES['PHOTO']['COTTAGE']) { ?>
+                       #}{# <? if ($VARIABLES['PHOTO']['COTTAGE']) { ?>
                         <div class="el__photo-slider">
                             <? foreach ($VARIABLES['PHOTO']['COTTAGE'] as $photo) { ?>
                             <div class="el__photo-slide">
@@ -490,7 +486,7 @@
                                  class="el__photo-thumb-slide">
                             <? } ?>
                         </div>
-                        <? } ?>#}
+                        <? } ?>#}{#
                     </div>
                     <div class="el__close-btn"></div>
                 </div>
@@ -530,10 +526,10 @@
                     </div>
                 </div>
             </div>
-            </div>
+            </div>#}
             <!-- el end -->
             <!-- el start -->
-            <div class="el">
+            {#<div class="el">
                 <div class="el__overflow">
                     <div class="el__inner">
                         <div class="el__bg"></div>
@@ -551,13 +547,13 @@
                                     <div class="el__order-header">Заказать</div>
                                     <div class="el__order-choose">Выберите удобный способ связи</div>
                                     <div class="el__tab-navs">
-                                        {#<div class="el__tab-nav" data-index="form">Форма</div>#}
+                                        #}{#<div class="el__tab-nav" data-index="form">Форма</div>#}{#
                                         <div class="el__tab-nav is-active" data-index="call">Звонок</div>
                                         <div class="el__tab-nav" data-index="whatsapp">WhatsApp</div>
                                         <div class="el__tab-nav" data-index="mail">E-mail</div>
                                     </div>
                                 <div class="el__order-tabs">
-                                    {#<?/*<div class="el__order-tab is-form" data-index="form">
+                                    #}{#<?/*<div class="el__order-tab is-form" data-index="form">
                                         <form action="ajax/sendmail.php" class="mail-form js-validate" data-id="taxi">
                                             <div class="el__order-comment">Заполните форму обратной связи</div>
                                             <input type="hidden" name="id" value='Такси'/>
@@ -586,7 +582,7 @@
                                         <div class="success-message">
                                             Ваша заявка успешно отправлена. <br/> В ближайшее время с вами свяжутся
                                         </div>
-                                    </div>*/?>#}
+                                    </div>*/?>#}{#
                                 <div class="el__order-tab is-active" data-index="call">
                                     <a href="tel:+79287075517">
                                         <div class="el__phone">+ 7 928 707 55 17</div>
@@ -631,7 +627,7 @@
                     </div>
                 </div>
             </div>
-            </div>
+            </div>#}
             <!-- el end -->
 
         </div>

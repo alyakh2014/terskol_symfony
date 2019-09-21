@@ -19,6 +19,14 @@ class SectionRepository extends ServiceEntityRepository
         parent::__construct($registry, Section::class);
     }
 
+    public function findAllAsArray()
+    {
+        return $this->createQueryBuilder('s')
+            ->getQuery()
+            ->getArrayResult()
+        ;
+    }
+
     // /**
     //  * @return Section[] Returns an array of Section objects
     //  */

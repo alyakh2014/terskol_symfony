@@ -9,10 +9,21 @@
 namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response,
     Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Section;
+use App\Entity\Images;
+use Doctrine\ORM\Query;
 
 class MainController extends AbstractController
 {
     public function Index(){
-        return $this->render('main/index.html.twig', array());
+        $sections = [];
+        $sectionDoctrine = $this->getDoctrine()->getRepository(Section::class)->findAllAsArray();
+        $sectionsAr = $sectionDoctrine;//->getArrayResult();
+        $imagesDoctrine = $this->getDoctrine()->getRepository(Images::class);
+        $imagesAr = $imagesDoctrine->findAll();
+        foreach ($imagesAr as $key=>$image){
+            $sectionsAr[$image->getSectionId()]["Images"][] = $image->getPath();
+        }
+        return $this->render('main/index.html.twig', array('Sections'=>$sectionsAr));
     }
 }

@@ -107,7 +107,7 @@ class ImagesController extends AbstractController
             $fileName = $pathNew->getClientOriginalName();
             $extractDir = 'img/'.$sectionDir;
             $filesystem = new FileSystem();
-            //Check wether file is exists
+            //Check whether file is exists
             if($filesystem->exists($extractDir.'/'.$fileName)){
                 $this->addFlash(
                     'file_exists',
