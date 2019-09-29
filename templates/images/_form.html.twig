@@ -1,7 +1,6 @@
 {{ form_start(form) }}
     {#{{ form_widget(form) }}#}
-
-   {{ form_errors(form) }}
+    {{ form_errors(form) }}
     <div class="form-group">
         {{ form_label(form.Section_id) }}
         {{ form_errors(form.Section_id) }}
@@ -10,19 +9,20 @@
     </div>
     <div class="form-group">
 
-        {{ form_errors(form.Path) }}
-        {% if method == 'edit'%}
-        {{ form_widget(form.Path, {'attr': {'class': 'form-control', 'rows' : 8, 'type': 'hidden'}}) }}
-        {%else%}
+
+        {% if method == 'new'%}
+        {#{{ form_widget(form.Path, {'attr': {'class': 'form-control', 'rows' : 8, 'type': 'hidden'}}) }}#}
+            {{ form_errors(form.Path) }}
             {{ form_label(form.Path) }}
             {{ form_widget(form.Path, {'attr': {'class': 'form-control', 'rows' : 8}}) }}
+            {{ form_help(form.Path) }}
         {% endif %}
-        {{ form_help(form.Path) }}
+
     </div>
 
-{#    {% if method == 'edit'%}
-        <input type="file" id="form_NewPath" name="form[NewPath]">
-    {% endif %}#}
+    {% if method == 'edit'%}
+        <input type="file" id="form_Path" name="form[Path]" required="required" class="form-control" rows="8">
+    {% endif %}
 
     <div class="form-group">
         <button class="btn">{{ button_label| default( 'Сохранить' ) }}</button>

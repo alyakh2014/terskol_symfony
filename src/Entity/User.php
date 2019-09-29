@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -34,6 +36,11 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    public function __construct()
+    {
+        $this->roles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -77,7 +84,6 @@ class User implements UserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
 
