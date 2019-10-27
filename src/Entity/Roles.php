@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\RoleRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\RolesRepository")
  */
-class Role
+class Roles
 {
     /**
      * @ORM\Id()
@@ -17,7 +17,7 @@ class Role
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=32)
      */
     private $name;
 

@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Role index{% endblock %}
+{% block title %}Roles index{% endblock %}
 
 {% block body %}
-    <h1>Role index</h1>
+    <h1>Roles index</h1>
 
     <table class="table">
         <thead>
@@ -19,8 +19,8 @@
                 <td>{{ role.id }}</td>
                 <td>{{ role.name }}</td>
                 <td>
-                    <a href="{{ path('role_show', {'id': role.id}) }}">show</a>
-                    <a href="{{ path('role_edit', {'id': role.id}) }}">edit</a>
+                    <a href="{{ path('roles_show', {'id': role.id}) }}">show</a>
+                    <a href="{{ path('roles_edit', {'id': role.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('role_new') }}">Create new</a>
+    <a href="{{ path('roles_new') }}">Create new</a>
 {% endblock %}

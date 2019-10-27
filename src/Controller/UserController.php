@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * @Route("/user")
@@ -18,11 +19,16 @@ class UserController extends AbstractController
     /**
      * @Route("/", name="user_index", methods={"GET"})
      */
-    public function index(UserRepository $userRepository): Response
+    public function index(UserRepository $userRepository, AuthorizationCheckerInterface $authChecker): Response
     {
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
+        if($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')){
+            if($authChecker->isGranted('ROLE_ADMIN')){
+                return $this->render('user/index.html.twig', [
+                    'users' => $userRepository->findAll(),
+                ]);
+            }
+        }
+        return $this->redirectToRoute('app_login');
     }
 
     /**
@@ -45,6 +51,7 @@ class UserController extends AbstractController
         return $this->render('user/new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
+            'roles'=> ['ROLE_USER']
         ]);
     }
 
