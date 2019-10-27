@@ -1,4 +1,25 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {#{{ form_widget(form) }}#}
+    <div class="form-group">
+        {{ form_label(form.email) }}
+        {{ form_errors(form.email) }}
+        {{ form_widget(form.email, {'attr': {'class': 'form-control', 'rows' : 8}}) }}
+        {{ form_help(form.email) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.id) }}
+        {{ form_errors(form.id) }}
+        {{ form_widget(form.id, {'attr': {'class': 'form-control', 'rows' : 8}}) }}
+        {{ form_help(form.id) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.password) }}
+        {{ form_errors(form.password) }}
+        {{ form_widget(form.password, {'attr': {'class': 'form-control', 'rows' : 8}}) }}
+        {{ form_help(form.password) }}
+    </div>
+
+    <div class="form-group">
+        <button class="btn">{{ button_label| default( 'Сохранить' ) }}</button>
+    </div>
 {{ form_end(form) }}

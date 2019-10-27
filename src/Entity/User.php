@@ -26,10 +26,19 @@ class User implements UserInterface
      */
     private $email;
 
+    // *  ** @ORM\Column(type="string", length=20, nullable=true)
+    //private $role;
+
     /**
-     * @ORM\Column(type="json")
+     * Many User have Many Roles
+     * @ORM\ManyToMany(targetEntity="Roles")
+     * @ORM\JoinTable(
+     *      name="user_roles",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
+     * )
      */
-    private $roles = [];
+    private $roles;
 
     /**
      * @var string The hashed password
@@ -69,16 +78,30 @@ class User implements UserInterface
         return (string) $this->email;
     }
 
+    public function addRole(Role $role)
+    {
+        $this->roles->add($role);
+    }
+
+    public function removeRole(Role $role)
+    {
+        $this->roles->removeElement($role);
+    }
+
     /**
      * @see UserInterface
      */
-    public function getRoles(): array
+    public function getRoles():array
     {
-        $roles = $this->roles->toArray();
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        if($roles = $this->roles->toArray()){
+            foreach($roles as $key=>&$tmpR){
+                $tempRole[] = $tmpR->getName();
+            }
+            return $tempRole;
+        }else{
+            return array('ROLE_USER');
+        }
 
-        return array_unique($roles);
     }
 
     public function setRoles(array $roles): self

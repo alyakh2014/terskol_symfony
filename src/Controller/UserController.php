@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use App\Entity\Roles;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
  * @Route("/user")
@@ -69,7 +71,19 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, User $user): Response
     {
-        $form = $this->createForm(UserType::class, $user);
+        $roles = [];
+        $roleDoctrine = $this->getDoctrine()->getRepository(Roles::class);
+        $rolesAr = $roleDoctrine->findAll();
+        foreach($rolesAr as $role){
+            $roles[$role->getName()] = $role->getId();
+        }
+
+        $form = $this->createForm(UserType::class, $user)
+            ->add('id', ChoiceType::class, array( 'choices'=>array($roles), 'label' => 'Role'));
+        /*$form = $this->createFormBuilder($user)
+            ->add('id', ChoiceType::class, array( 'choices'=>array($roles)))
+            ->getForm();*/
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -81,6 +95,7 @@ class UserController extends AbstractController
         return $this->render('user/edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
+            'roles' => $roles,
         ]);
     }
 
