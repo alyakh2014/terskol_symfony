@@ -51,7 +51,6 @@ class UserController extends AbstractController
         return $this->render('user/new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
-            'roles'=> ['ROLE_USER']
         ]);
     }
 
